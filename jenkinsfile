@@ -4,22 +4,23 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                // Reemplazar con la URL de tu repositorio Git
-                git 'https://github.com/SergioTomasUrs/jenkins-python.git'
+                // Cambia la URL a la de tu repositorio y especifica la rama 'main'
+                git branch: 'main',
+                    url: 'https://github.com/SergioTomasUrs/jenkins-python.git'
             }
         }
         stage('Test') {
             steps {
                 // Ejecutar pruebas unitarias
-                sh 'python -m unittest test_app.py'
+                sh 'python3 -m unittest test_app.py'
             }
         }
         stage('Build') {
             steps {
-                // Paso de construcción simulado
                 echo 'Construyendo la aplicación...'
-                // Aquí podrías, por ejemplo, instalar dependencias, preparar entornos virtuales, etc.
-                sh 'pip install -r requirements.txt'
+                sh 'python3 -m venv venv' // Crea un entorno virtual
+                sh '. venv/bin/activate' // Activa el entorno virtual
+                sh 'pip install -r requirements.txt' // Instala dependencias en el entorno virtual
             }
         }
         stage('Deploy') {
@@ -31,5 +32,4 @@ pipeline {
         }
     }
 }
-
 
