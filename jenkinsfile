@@ -1,0 +1,25 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Checkout') {
+            steps {
+                // Asegúrate de reemplazar esto con la URL de tu repositorio Git
+                git 'url_del_repositorio'
+            }
+        }
+        stage('Test') {
+            steps {
+                // Ejecutar pruebas unitarias
+                sh 'python -m unittest test_app.py'
+            }
+        }
+        stage('Build') {
+            steps {
+                // Paso de construcción simulado
+                echo 'Construyendo la aplicación...'
+                // Aquí podrías, por ejemplo, instalar dependencias, preparar entornos virtuales, etc.
+                // sh 'pip install -r requirements.txt'
+            }
+        }
+
