@@ -4,8 +4,8 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                // Asegúrate de reemplazar esto con la URL de tu repositorio Git
-                git 'url_del_repositorio'
+                // Reemplazar con la URL de tu repositorio Git
+                git 'https://github.com/SergioTomasUrs/jenkins-python.git'
             }
         }
         stage('Test') {
@@ -19,7 +19,17 @@ pipeline {
                 // Paso de construcción simulado
                 echo 'Construyendo la aplicación...'
                 // Aquí podrías, por ejemplo, instalar dependencias, preparar entornos virtuales, etc.
-                // sh 'pip install -r requirements.txt'
+                sh 'pip install -r requirements.txt'
             }
         }
+        stage('Deploy') {
+            steps {
+                // Simular un despliegue
+                echo 'Desplegando la aplicación...'
+                // Aquí irían los comandos reales de despliegue, si los hubiera
+            }
+        }
+    }
+}
+
 
