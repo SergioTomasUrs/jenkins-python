@@ -12,7 +12,7 @@ pipeline {
         stage('Test') {
             steps {
                 // Ejecutar pruebas unitarias
-                sh 'python3 -m unittest test_app.py'
+                sh 'python3 -m unittest unitest.py'
             }
         }
         stage('Build') {
@@ -28,8 +28,8 @@ pipeline {
                 // Simular un despliegue
                 echo 'Desplegando la aplicación...'
                 // Aquí irían los comandos reales de despliegue, si los hubiera
-                // SOLO DEBE HACER PYTHON DENTRO DEL CONTENEDOR, NO FUERA, IMPORTANTE!!!
-                // La idea es intstalar docker dentro del contenedor docker para crear la imagen y subirla a docker hub o docker registry
+                // SOLO DEBE HACER PYTHON DENTRO DEL CONTENEDOR, NO FUERA IMPORTANTE!!!
+                // La idea es intstalar docker dentro del contenedor docker para crear la imagen y subirla a docker
             }
         }
     }
