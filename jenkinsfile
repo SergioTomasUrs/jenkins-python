@@ -2,20 +2,20 @@ pipeline {
     agent any
 
     stages {
-        stage('Checkout') {
+        stage('Verificar repo') {
             steps {
                 // Cambia la URL a la de tu repositorio y especifica la rama 'main'
                 git branch: 'main',
                     url: 'https://github.com/SergioTomasUrs/jenkins-python.git'
             }
         }
-        stage('Test') {
+        stage('Pruebas') {
             steps {
                 // Ejecutar pruebas unitarias
                 sh 'python3 -m unittest unitest.py'
             }
         }
-        stage('Build') {
+        stage('Entorno virtual') {
             steps {
                 echo 'Construyendo la aplicación...'
                 sh 'python3 -m venv venv' // Crea un entorno virtual
@@ -23,7 +23,7 @@ pipeline {
                 sh 'pip install --break-system-packages -r requirements.txt' // Instala dependencias en el entorno virtual
             }
         }
-        stage('Deploy') {
+        stage('Despliegue') {
             steps {
                 // Simular un despliegue
                 echo 'Desplegando la aplicación...'
@@ -31,6 +31,14 @@ pipeline {
                 // SOLO DEBE HACER PYTHON DENTRO DEL CONTENEDOR, NO FUERA IMPORTANTE!!!
                 // La idea es intstalar docker dentro del contenedor docker para crear la imagen y subirla a docker
             }
+        }
+    }
+     post {
+        success {
+            echo 'La canalización se ejecutó exitosamente. Puede proceder con el despliegue a producción si es necesario.'
+        }
+        failure {
+            echo 'La canalización falló. Se deben abordar los problemas antes de proceder con el despliegue.'
         }
     }
 }
